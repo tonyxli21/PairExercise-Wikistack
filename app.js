@@ -4,7 +4,11 @@ const layout = require('./views/layout');
 const { db, Page, User } = require('./models');
 const app = express();
 const Sequelize = require('sequelize');
+const wiki = require('./routes/wiki');
+const users = require('./routes/users');
 
+app.use('/wiki', wiki);
+app.use('/users', users);
 
 app.use(morgan('dev'));
 
@@ -23,7 +27,8 @@ db.authenticate()
 // Creates GET request
 app.get('/', (req, res, next) => {
   // res.send("hello world");
-  res.send(layout(''));
+  // res.send(layout(''));
+  res.redirect('/wiki');
 });
 
 const PORT = 3000;
@@ -35,3 +40,4 @@ const init = async () => {
 }
 
 init();
+
